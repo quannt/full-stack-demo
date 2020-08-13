@@ -21,3 +21,11 @@ A simple CRUD app that supports managing employees and the review process.
 * Employee Portal - Feedback modal
 
 ![enter image description here](https://user-images.githubusercontent.com/3423859/90146894-9284fa80-ddbc-11ea-8b0f-32000bd16456.png)
+
+## Database schema
+![database schema](https://user-images.githubusercontent.com/3423859/90150266-73886780-ddc0-11ea-959e-1cf350d559c3.png)
+
+
+
+# Logs
+* 2020/08/13: Add mockups, schema. (1 hour).
