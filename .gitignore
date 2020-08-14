@@ -107,3 +107,18 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+.DS_Store
+
+/tests/e2e/videos/
+/tests/e2e/screenshots/
+
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
