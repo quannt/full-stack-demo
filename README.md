@@ -49,4 +49,4 @@ A simple CRUD app that supports managing employees and the review process.
 
 # Logs
 * 2020/08/13: Add mockups, schema. (1 hour).
-* 2020/08/14: Add employees API endpoints.
+* 2020/08/14: Add API endpoints. (2 hours).
