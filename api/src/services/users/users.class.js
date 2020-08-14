@@ -21,7 +21,7 @@ exports.Users = class Users extends Service {
   }
   update (id, data, params) {
     data.last_updated = new Date();
-    return super.update(data, params);
+    return super.patch(id, data, params);
   }
   remove (id) {
     return super.patch(id, {

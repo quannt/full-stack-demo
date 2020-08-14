@@ -32,9 +32,19 @@ A simple CRUD app that supports managing employees and the review process.
 |-|-|
 | Add employee | POST /users/ |
 | Remove employee | DELETE /users/:id |
-| Update employee | POST /users/:id |
+| Update employee | PUT /users/:id |
 | View employee | GET /users/:id |
 | View all employees | GET /users/ |
+
+
+* Reviews
+
+| Name | Endpoint |
+|-|-|
+| Add review | POST /reviews/ |
+| Update employee | PUT /reviews/:id |
+| View review by reviewee | GET /reviews?reviewee_id=:id |
+| View all reviews | GET /reviews/ |
 
 
 # Logs
