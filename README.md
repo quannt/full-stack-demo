@@ -25,7 +25,18 @@ A simple CRUD app that supports managing employees and the review process.
 ## Database schema
 ![database schema](https://user-images.githubusercontent.com/3423859/90150266-73886780-ddc0-11ea-959e-1cf350d559c3.png)
 
+## API Endpoints
+* Employees
+
+| Name | Endpoint |
+|-|-|
+| Add employee | POST /users/ |
+| Remove employee | DELETE /users/:id |
+| Update employee | POST /users/:id |
+| View employee | GET /users/:id |
+| View all employees | GET /users/ |
 
 
 # Logs
 * 2020/08/13: Add mockups, schema. (1 hour).
+* 2020/08/14: Add employees API endpoints.
