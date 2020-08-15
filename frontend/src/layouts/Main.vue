@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>Baymax Portal</el-header>
+    <el-header class="header">Baymax Portal</el-header>
     <el-container>
       <el-aside>
         <el-menu :default-openeds="['1']">
@@ -65,8 +65,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-aside {
   border-right: solid 1px #e6e6e6;
+}
+.header {
+  background: #f24f4f;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 </style>
