@@ -1,27 +1,28 @@
 <template>
   <el-container>
-    <el-aside>
-      <el-menu :default-openeds="['1']">
-        <el-submenu index="1">
-          <template slot="title"
-            ><i class="el-icon-star-on"></i>{{ title }}</template
-          >
-          <el-menu-item-group>
-            <router-link
-              v-for="(menu, index) in menus"
-              :key="index"
-              :to="{ name: menu.name }"
-            >
-              <el-menu-item>
-                {{ menu.title }}
-              </el-menu-item>
-            </router-link>
-          </el-menu-item-group>
-        </el-submenu>
-      </el-menu>
-    </el-aside>
-
+    <el-header>Baymax Portal</el-header>
     <el-container>
+      <el-aside>
+        <el-menu :default-openeds="['1']">
+          <el-submenu index="1">
+            <template slot="title"
+              ><i class="el-icon-star-on"></i>{{ title }}</template
+            >
+            <el-menu-item-group>
+              <router-link
+                v-for="(menu, index) in menus"
+                :key="index"
+                :to="{ name: menu.name }"
+              >
+                <el-menu-item>
+                  {{ menu.title }}
+                </el-menu-item>
+              </router-link>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
+      </el-aside>
+
       <router-view />
     </el-container>
   </el-container>
