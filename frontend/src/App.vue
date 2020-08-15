@@ -15,5 +15,15 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+}
+.el-container {
+  height: 100vh;
+}
+.el-menu {
+  border-right: none;
+}
+.el-main {
+  padding: 50px;
 }
 </style>
