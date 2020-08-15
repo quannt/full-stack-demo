@@ -1,23 +1,22 @@
 <template>
   <el-container>
     <el-aside>
-      <el-menu :default-openeds="['1', '3']">
+      <el-menu :default-openeds="['1']">
         <el-submenu index="1">
           <template slot="title"
-            ><i class="el-icon-message"></i>Navigator One</template
+            ><i class="el-icon-star-on"></i>{{ title }}</template
           >
           <el-menu-item-group>
-            <template slot="title">Group 1</template>
-            <el-menu-item index="1-1">Option 1</el-menu-item>
-            <el-menu-item index="1-2">Option 2</el-menu-item>
+            <router-link
+              v-for="(menu, index) in menus"
+              :key="index"
+              :to="{ name: menu.name }"
+            >
+              <el-menu-item>
+                {{ menu.title }}
+              </el-menu-item>
+            </router-link>
           </el-menu-item-group>
-          <el-menu-item-group title="Group 2">
-            <el-menu-item index="1-3">Option 3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">Option4</template>
-            <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-          </el-submenu>
         </el-submenu>
       </el-menu>
     </el-aside>
@@ -29,13 +28,44 @@
 </template>
 
 <script>
+import { Roles } from "@/constants/roles";
 export default {
   name: "MainLayout",
 
-  data() {
-    return {};
+  props: {
+    roles: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
+
+  computed: {
+    title() {
+      return this.isAdmin ? "Admin Portal" : "Employee Portal";
+    },
+    menus() {
+      return [
+        {
+          name: "ReviewsManagement",
+          title: "Reviews Management"
+        },
+        {
+          name: "EmployeesManagement",
+          title: "Employees Management"
+        }
+      ];
+    },
+    isAdmin() {
+      return this.roles.includes(Roles.Admin);
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+.el-aside {
+  border-right: solid 1px #e6e6e6;
+}
+</style>
