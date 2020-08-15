@@ -1,5 +1,7 @@
 
 
+const populateUser = require('../../hooks/populate-user');
+
 module.exports = {
   before: {
     all: [],
@@ -13,8 +15,8 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
-    get: [],
+    find: [populateUser()],
+    get: [populateUser()],
     create: [],
     update: [],
     patch: [],
