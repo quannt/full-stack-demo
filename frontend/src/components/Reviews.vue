@@ -17,8 +17,9 @@
           <el-tag
             v-for="reviewer in scope.row.reviewers"
             :key="reviewer._id"
-            type="success">
-             {{ reviewer.name }}
+            type="success"
+          >
+            {{ reviewer.name }}
           </el-tag>
         </template>
       </el-table-column>
@@ -36,7 +37,7 @@
 
 <script>
 import ReviewsService from "@/services/ReviewsService";
-import groupBy from 'lodash.groupby';
+import groupBy from "lodash.groupby";
 
 export default {
   name: "Reviews",
@@ -47,26 +48,26 @@ export default {
     };
   },
 
+  computed: {
+    groupedReviews() {
+      let result = [];
+      const groupByReviewee = groupBy(this.reviews, "reviewee_id");
+      Object.keys(groupByReviewee).forEach(reviewee_id => {
+        result.push({
+          reviewee: groupByReviewee[reviewee_id][0]?.reviewee,
+          reviewers: groupByReviewee[reviewee_id].map(review => review.reviewer)
+        });
+      });
+      return result;
+    }
+  },
+
   async created() {
     try {
       const response = await ReviewsService.getReviews();
       this.reviews = response?.data;
     } catch (error) {
       this.$message.error("Failed to load reviews. Please try again.");
-    }
-  },
-
-  computed: {
-    groupedReviews() {
-      let result = []
-      const groupByReviewee = groupBy(this.reviews, 'reviewee_id');
-      Object.keys(groupByReviewee).forEach(reviewee_id => {
-        result.push({
-          reviewee: groupByReviewee[reviewee_id][0]?.reviewee,
-          reviewers: groupByReviewee[reviewee_id].map(review => review.reviewer)
-        })
-      })
-      return result
     }
   }
 };
