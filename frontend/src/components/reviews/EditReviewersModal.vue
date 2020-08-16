@@ -12,7 +12,7 @@
           :fetch-suggestions="querySearch"
           placeholder="Search for employee to set as reviewer"
           class="employee-autocomplete"
-          @select="handleSelect"
+          @select="handleSelectEmployee"
         >
           <template slot-scope="{ item }">
             <div class="value">{{ item.name }}</div>
@@ -23,7 +23,6 @@
 
     <el-table :data="reviews" style="width: 100%" empty-text="There's no data">
       <el-table-column type="index" width="50"> </el-table-column>
-
       <el-table-column label="Reviewer">
         <template slot-scope="scope">
           {{ scope.row.reviewer.name }}
@@ -82,7 +81,7 @@ export default {
   data() {
     return {
       employeeQuery: null,
-      form: {},
+      newReviews: [],
       StatusLabels: {
         not_started: {
           label: "Not Started",
@@ -102,24 +101,44 @@ export default {
 
   computed: {
     reviews() {
-      return this.selectedReviews;
+      return [...this.selectedReviews, ...this.newReviews];
+    },
+    reviewersIds() {
+      return this.reviews.map(r => r?.reviewer?._id) ?? [];
     }
   },
 
   methods: {
     get,
     async querySearch(queryString, cb) {
-      const searchResponse = await UsersService.getUsers([
-        {
-          key: "name",
-          value: queryString
-        }
-      ]);
-      const result = searchResponse?.data ?? [];
-      cb(result);
+      try {
+        const searchResponse = await UsersService.getUsers([
+          {
+            key: "name",
+            value: queryString
+          }
+        ]);
+        const result = searchResponse?.data ?? [];
+        cb(result);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    handleSelect(item) {
-      console.log(item);
+    handleSelectEmployee(newReviewer) {
+      if (newReviewer._id === this.reviewee._id) {
+        this.$message.error("Sorry, users cannot review themselves.");
+        return;
+      }
+
+      if (this.reviewersIds.includes(newReviewer._id)) {
+        this.$message.error("Sorry, user has already been chosen as reviewer.");
+        return;
+      }
+      this.newReviews.push({
+        _id: null,
+        reviewer: newReviewer,
+        status: "not_started"
+      });
     }
   }
 };
