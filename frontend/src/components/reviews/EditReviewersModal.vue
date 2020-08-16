@@ -43,9 +43,7 @@
 
     <span slot="footer" class="dialog-footer">
       <el-button @click="$emit('update:visible', false)">Cancel</el-button>
-      <el-button type="primary" @click="$emit('update:visible', false)"
-        >Save</el-button
-      >
+      <el-button type="primary" @click="handleSave">Save</el-button>
     </span>
   </el-dialog>
 </template>
@@ -139,6 +137,16 @@ export default {
         reviewer: newReviewer,
         status: "not_started"
       });
+    },
+    handleSave() {
+      this.$emit("update:visible", false);
+      this.$emit(
+        "submit",
+        this.newReviews.map(review => ({
+          reviewee_id: this.reviewee._id,
+          reviewer_id: review.reviewer._id
+        }))
+      );
     }
   }
 };

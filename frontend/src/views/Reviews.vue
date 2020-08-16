@@ -41,6 +41,7 @@
       :visible.sync="dialogFormVisible"
       :reviewee="selectedReviewee"
       :selected-reviews="selectedReviews"
+      @submit="handleNewReviewsAdded"
     />
   </el-main>
 </template>
@@ -103,6 +104,16 @@ export default {
       this.dialogFormVisible = true;
       this.selectedReviewee = item.reviewee;
       this.selectedReviews = item.reviews;
+    },
+    async handleNewReviewsAdded(newReviews) {
+      try {
+        const response = await ReviewsService.createReview(newReviews);
+        const addedReviews = response?.data ?? [];
+        this.reviews = [...this.reviews, ...addedReviews];
+        this.$message.success("Reviewer has been assigned successfully.");
+      } catch (error) {
+        this.$message.error("Failed to create reviews. Please try again.");
+      }
     }
   }
 };
@@ -111,5 +122,6 @@ export default {
 <style scoped>
 .el-tag {
   margin-right: 15px;
+  margin-bottom: 10px;
 }
 </style>
