@@ -10,7 +10,7 @@
           v-model="employeeQuery"
           prefix-icon="el-icon-search"
           :fetch-suggestions="querySearch"
-          placeholder="Please type employee's name to add"
+          placeholder="Search for employee to set as reviewer"
           class="employee-autocomplete"
           @select="handleSelect"
         >
@@ -20,10 +20,32 @@
         >
       </el-form-item>
     </el-form>
+
+    <el-table :data="reviews" style="width: 100%" empty-text="There's no data">
+      <el-table-column type="index" width="50"> </el-table-column>
+
+      <el-table-column label="Reviewer">
+        <template slot-scope="scope">
+          {{ scope.row.reviewer.name }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Status">
+        <template slot-scope="scope">
+          <el-tag size="small" :type="StatusLabels[scope.row.status].tagType">{{
+            StatusLabels[scope.row.status].label
+          }}</el-tag>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="Operations">
+        <el-button size="mini" type="danger" disabled>Remove</el-button>
+      </el-table-column>
+    </el-table>
+
     <span slot="footer" class="dialog-footer">
       <el-button @click="$emit('update:visible', false)">Cancel</el-button>
       <el-button type="primary" @click="$emit('update:visible', false)"
-        >Confirm</el-button
+        >Save</el-button
       >
     </span>
   </el-dialog>
@@ -48,7 +70,7 @@ export default {
         return {};
       }
     },
-    selectedReviewers: {
+    selectedReviews: {
       type: Array,
       require: false,
       default() {
@@ -60,8 +82,28 @@ export default {
   data() {
     return {
       employeeQuery: null,
-      form: {}
+      form: {},
+      StatusLabels: {
+        not_started: {
+          label: "Not Started",
+          tagType: "warning"
+        },
+        in_progress: {
+          label: "In Progress",
+          tagType: "info"
+        },
+        submitted: {
+          label: "Submitted",
+          tagType: "success"
+        }
+      }
     };
+  },
+
+  computed: {
+    reviews() {
+      return this.selectedReviews;
+    }
   },
 
   methods: {

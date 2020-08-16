@@ -20,11 +20,11 @@
       <el-table-column label="Reviewers">
         <template slot-scope="scope">
           <el-tag
-            v-for="reviewer in scope.row.reviewers"
-            :key="reviewer._id"
+            v-for="review in scope.row.reviews"
+            :key="review._id"
             type="success"
           >
-            {{ reviewer.name }}
+            {{ review.reviewer.name }}
           </el-tag>
         </template>
       </el-table-column>
@@ -40,7 +40,7 @@
     <EditReviewersModal
       :visible.sync="dialogFormVisible"
       :reviewee="selectedReviewee"
-      :selected-reviewers="selectedReviewers"
+      :selected-reviews="selectedReviews"
     />
   </el-main>
 </template>
@@ -61,7 +61,7 @@ export default {
     return {
       reviews: [],
       selectedReviewee: null,
-      selectedReviewers: [],
+      selectedReviews: [],
       dialogFormVisible: false,
       loading: false
     };
@@ -74,7 +74,13 @@ export default {
       Object.keys(groupByReviewee).forEach(reviewee_id => {
         result.push({
           reviewee: groupByReviewee[reviewee_id][0]?.reviewee,
-          reviewers: groupByReviewee[reviewee_id].map(review => review.reviewer)
+          reviews: groupByReviewee[reviewee_id].map(review => {
+            return {
+              reviewer: review.reviewer,
+              status: review.status,
+              _id: review._id
+            };
+          })
         });
       });
       return result;
@@ -96,7 +102,7 @@ export default {
     handleEdit(item) {
       this.dialogFormVisible = true;
       this.selectedReviewee = item.reviewee;
-      this.selectedReviewers = item.reviewers;
+      this.selectedReviews = item.reviews;
     }
   }
 };
