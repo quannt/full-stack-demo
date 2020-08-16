@@ -1,6 +1,4 @@
-
-
-const populateUser = require('../../hooks/populate-user');
+const populateUser = require("../../hooks/populate-user");
 
 module.exports = {
   before: {
@@ -10,17 +8,17 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
     all: [],
     find: [populateUser()],
     get: [populateUser()],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [populateUser()],
+    update: [populateUser()],
+    patch: [populateUser()],
+    remove: [],
   },
 
   error: {
@@ -30,6 +28,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };
