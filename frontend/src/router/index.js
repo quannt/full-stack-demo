@@ -20,7 +20,7 @@ const routes = [
         path: "reviews",
         name: "ReviewsManagement",
         component: () =>
-          import(/* webpackChunkName: "admin-layout" */ "../views/Reviews.vue")
+          import(/* webpackChunkName: "admin-reviews" */ "../views/Reviews.vue")
       }
     ]
   }
