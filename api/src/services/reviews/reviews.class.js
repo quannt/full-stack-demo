@@ -7,6 +7,10 @@ const ReviewStatus = {
 };
 exports.Reviews = class Reviews extends Service {
   create(data, params) {
+    if (Array.isArray(data)) {
+      return this.createMultiple(data, params);
+    }
+
     const { reviewer_id, reviewee_id, content } = data;
     const created = new Date();
     const last_updated = new Date();
@@ -26,5 +30,19 @@ exports.Reviews = class Reviews extends Service {
   update(id, data, params) {
     data.last_updated = new Date();
     return super.patch(id, data, params);
+  }
+  createMultiple(data, params) {
+    let addReviews = data;
+
+    return Promise.all(
+      addReviews.map((addReview) =>
+        super.create({
+          ...addReview,
+          created: new Date(),
+          last_updated: new Date(),
+          status: ReviewStatus.NotStarted,
+        })
+      )
+    );
   }
 };
