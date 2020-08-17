@@ -21,6 +21,14 @@ const routes = [
         name: "ReviewsManagement",
         component: () =>
           import(/* webpackChunkName: "admin-reviews" */ "../views/Reviews.vue")
+      },
+      {
+        path: "employees",
+        name: "EmployeesManagement",
+        component: () =>
+          import(
+            /* webpackChunkName: "admin-employees" */ "../views/Employees.vue"
+          )
       }
     ]
   }
