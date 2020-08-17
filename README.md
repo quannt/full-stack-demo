@@ -26,7 +26,7 @@ A simple CRUD app that supports managing employees and the review process.
 
 ## Database schema
 
-![database schema](https://user-images.githubusercontent.com/3423859/90150266-73886780-ddc0-11ea-959e-1cf350d559c3.png)
+![database schema](https://user-images.githubusercontent.com/3423859/90414912-54a11280-e0eb-11ea-9279-c6a5217cacf0.png)
 
 ## API Endpoints
 
