@@ -51,6 +51,19 @@ A simple CRUD app that supports managing employees and the review process.
 | View review by reviewee | GET /reviews?reviewee_id=:id |
 | View all reviews        | GET /reviews/                |
 
+## Features
+
+- [x] CRUD API for Employees.
+- [x] CRUD API for Reviews.
+- [x] Admin View - Add/view employees.
+- [ ] Admin View - Remove/update employees.
+- [x] Admin View - Add/update performance reviews.
+- [x] Admin View - Assign employees to participate in another employee's performance review.
+- [ ] Employee view.
+- [ ] Authentication system.
+- [ ] More defensive coding in backend to guard against bad inputs.
+- [ ] Testting.
+
 # Demos
 
 - [Admin Employees Management](https://recordit.co/0l6BTvYsBY)
