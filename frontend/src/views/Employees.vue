@@ -11,7 +11,7 @@
           v-model="newEmployeeName"
           style="width: 300px;"
           placeholder="Type new employee's name here..."
-          v-on:keyup.enter.native="handleAdd"
+          @:keyup.enter.native="handleAdd"
         ></el-input>
       </el-form-item>
       <el-form-item>

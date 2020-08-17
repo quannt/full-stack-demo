@@ -1,10 +1,30 @@
 <template>
   <el-dialog
-    :title="`${get(reviewee, 'name')}'s Review Details`"
+    :title="
+      createMode
+        ? 'Add New Review'
+        : `${get(reviewee, 'name')}'s Review Details`
+    "
     :visible="visible"
     @update:visible="$emit('update:visible', $event)"
+    @close="handleResetForm"
   >
     <el-form>
+      <el-form-item v-if="createMode">
+        <el-autocomplete
+          v-model="addEmployeeQuery"
+          prefix-icon="el-icon-search"
+          :fetch-suggestions="querySearch"
+          placeholder="Search for employee to set as reviewee"
+          class="employee-autocomplete"
+          style="width: 80%;"
+          @select="handleSelectReviewee"
+        >
+          <template slot-scope="{ item }">
+            <div class="value">{{ item.name }}</div>
+          </template></el-autocomplete
+        >
+      </el-form-item>
       <el-form-item>
         <el-autocomplete
           v-model="employeeQuery"
@@ -12,12 +32,16 @@
           :fetch-suggestions="querySearch"
           placeholder="Search for employee to set as reviewer"
           class="employee-autocomplete"
+          style="width: 80%;"
           @select="handleSelectEmployee"
         >
           <template slot-scope="{ item }">
             <div class="value">{{ item.name }}</div>
           </template></el-autocomplete
         >
+      </el-form-item>
+      <el-form-item v-if="createMode" label="Selected reviewee">
+        {{ get(reviewee, "name", "") }}
       </el-form-item>
     </el-form>
 
@@ -73,12 +97,17 @@ export default {
       default() {
         return [];
       }
+    },
+    createMode: {
+      type: Boolean,
+      default: false
     }
   },
 
   data() {
     return {
       employeeQuery: null,
+      addEmployeeQuery: null,
       newReviews: [],
       StatusLabels: {
         not_started: {
@@ -138,6 +167,10 @@ export default {
         status: "not_started"
       });
     },
+    handleSelectReviewee(newReviewee) {
+      // this.localReviewee = newReviewee;
+      this.$emit("update:reviewee", newReviewee);
+    },
     handleSave() {
       this.$emit("update:visible", false);
       this.$emit(
@@ -147,6 +180,12 @@ export default {
           reviewer_id: review.reviewer._id
         }))
       );
+    },
+    handleResetForm() {
+      this.newReviews = [];
+      this.employeeQuery = null;
+      this.addEmployeeQuery = null;
+      this.$emit("close");
     }
   }
 };

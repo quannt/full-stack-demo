@@ -5,6 +5,10 @@
       <el-breadcrumb-item>Reviews Management</el-breadcrumb-item>
     </el-breadcrumb>
 
+    <div class="table-actions">
+      <el-button icon="el-icon-plus" @click="handleAdd">Add</el-button>
+    </div>
+
     <el-table
       v-loading="loading"
       :data="groupedReviews"
@@ -38,10 +42,13 @@
 
     <!-- Form -->
     <EditReviewersModal
-      :visible.sync="dialogFormVisible"
+      :visible.sync="showEditModal"
       :reviewee="selectedReviewee"
       :selected-reviews="selectedReviews"
+      :create-mode="createMode"
+      @update:reviewee="handleSelectedReviewee"
       @submit="handleNewReviewsAdded"
+      @close="handleResetReviewerModal"
     />
   </el-main>
 </template>
@@ -63,7 +70,8 @@ export default {
       reviews: [],
       selectedReviewee: null,
       selectedReviews: [],
-      dialogFormVisible: false,
+      showEditModal: false,
+      createMode: false,
       loading: false
     };
   },
@@ -101,7 +109,8 @@ export default {
 
   methods: {
     handleEdit(item) {
-      this.dialogFormVisible = true;
+      this.showEditModal = true;
+      this.createMode = false;
       this.selectedReviewee = item.reviewee;
       this.selectedReviews = item.reviews;
     },
@@ -114,6 +123,17 @@ export default {
       } catch (error) {
         this.$message.error("Failed to create reviews. Please try again.");
       }
+    },
+    handleAdd() {
+      this.showEditModal = true;
+      this.createMode = true;
+    },
+    handleSelectedReviewee(user) {
+      this.selectedReviewee = user;
+    },
+    handleResetReviewerModal() {
+      this.selectedReviewee = null;
+      this.selectedReviews = [];
     }
   }
 };
@@ -123,5 +143,8 @@ export default {
 .el-tag {
   margin-right: 15px;
   margin-bottom: 10px;
+}
+.table-actions {
+  margin-top: 20px;
 }
 </style>
