@@ -6,7 +6,7 @@ import MainLayout from "@/layouts/Main";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", redirect: { name: "Admin" } },
+  { path: "/", redirect: { name: "ReviewsManagement" } },
   {
     path: "/admin",
     name: "Admin",
