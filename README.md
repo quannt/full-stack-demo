@@ -51,7 +51,7 @@ A simple CRUD app that supports managing employees and the review process.
 | View review by reviewee | GET /reviews?reviewee_id=:id |
 | View all reviews        | GET /reviews/                |
 
-# Logs
+# Demos
 
-- 2020/08/13: Add mockups, schema. (1 hour).
-- 2020/08/14: Add API endpoints. (2 hours).
+- [Admin Employees Management](https://recordit.co/0l6BTvYsBY)
+- [Admin Reviews Management](https://recordit.co/9hcWvNR9Nn)
