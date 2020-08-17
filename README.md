@@ -51,6 +51,20 @@ A simple CRUD app that supports managing employees and the review process.
 | View review by reviewee | GET /reviews?reviewee_id=:id |
 | View all reviews        | GET /reviews/                |
 
+## Technical decisions
+
+- On the backend, I choose [featherjs](https://docs.feathersjs.com/) to quickly scaffolding the CRUD endpoints and [NeDB](https://github.com/louischatriot/nedb) as the persistent layer. All data are stored under `api/data` folder. Most logic are under these 4 files
+
+  1.  `api/src/hooks/populate-user.js`.
+  2.  `api/src/hooks/search-regex.js`.
+  3.  `api/src/services/reviews/reviews.class.js`.
+  4.  `api/src/services/users/users.class.js`
+
+- On the frontend, I choose [vuejs](https://vuejs.org/) and [element-ui](https://element.eleme.io/) for their simplicity. There are 3 layers to the app: layouts, views and components.
+  1.  Layouts are side-wide components that can be easily reusable by different views.
+  2.  Views are page-level components, there are 2 views in this app, admin employees view and admin reviews view.
+  3.  Components are the lowest building blocks and should be categorized based on their functionality under `components` folder.
+
 ## Features
 
 - [x] CRUD API for Employees.
@@ -62,7 +76,7 @@ A simple CRUD app that supports managing employees and the review process.
 - [ ] Employee view.
 - [ ] Authentication system.
 - [ ] More defensive coding in backend to guard against bad inputs.
-- [ ] Testting.
+- [ ] Testing.
 
 # Demos
 
