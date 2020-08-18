@@ -2,6 +2,30 @@
 
 A simple CRUD app that supports managing employees and the review process.
 
+## Setup
+
+Make sure Node LTS is installed.
+
+1. To start backend server (default port is 3030)
+
+```
+./api.sh
+
+OR
+
+cd api && npm install && npm run start
+```
+
+2. To start frontend server (default port is 8080)
+
+```
+./frontend.sh
+
+OR
+
+cd frontend && npm install && npm run serve
+```
+
 ## Screens mockups
 
 - Employees management screen mockup
