@@ -51,6 +51,13 @@ A simple CRUD app that supports managing employees and the review process.
 | View review by reviewee | GET /reviews?reviewee_id=:id |
 | View all reviews        | GET /reviews/                |
 
+## Assumptions:
+
+- The tables were only designed to work with one review "season". A reviewer can only review a reviewee once.
+- Reviewers can save a feedback as draft and submit it later.
+- Users use the application on desktops. There's no mobile support at the moment.
+- No audit log is required.
+
 ## Technical decisions
 
 - On the backend, I choose [featherjs](https://docs.feathersjs.com/) to quickly scaffolding the CRUD endpoints and [NeDB](https://github.com/louischatriot/nedb) as the persistent layer. All data are stored under `api/data` folder. Most logic are under these 4 files
