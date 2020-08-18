@@ -49,12 +49,12 @@ export default {
     menus() {
       return [
         {
-          name: "ReviewsManagement",
-          title: "Reviews Management"
-        },
-        {
           name: "EmployeesManagement",
           title: "Employees Management"
+        },
+        {
+          name: "ReviewsManagement",
+          title: "Reviews Management"
         }
       ];
     },
