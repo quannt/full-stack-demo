@@ -85,6 +85,7 @@ A simple CRUD app that supports managing employees and the review process.
 - [ ] More defensive coding in backend to guard against bad inputs.
 - [ ] Testing.
 - [ ] CD/CI.
+- [ ] Deployment instructions.
 
 # Demos
 
